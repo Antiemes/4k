@@ -1,3 +1,5 @@
+#version 120
+
 uniform float t;
 
 #define iTime t
