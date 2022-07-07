@@ -151,7 +151,7 @@ void main()
 	{
 		col = vec3(1.,.5,.1);
 	}
-	else if(map(p, color)<.1)
+	else if(map(p, col)<.1)
 	{
 		col += ambiantOcclusion(p,-dir,1.5);
 		col *= ambiantOcclusion(p,n,1.5);
