@@ -46,31 +46,17 @@ float flame(vec3 p)
 
 float map( in vec3 p )
 {
+  float d2;
 	p.x -= 17./2.;
 	float d = 999999.;
 	vec3 pp = p-vec3(17./2.,0.,0.);
 	pp.xy = mod(p.xy,vec2(1.))-.5;
 	d = min(d, box(pp,vec3(.3,.3,1.)) );
-	d = max(d, p.x);
-	d = max(d, -p.x-17.);
-	d = max(d, p.y-4.);
-	d = max(d, -p.y);
-	d = max(d, -box(p+vec3(16.5,-3.5,0.), vec3(.4,.4,2.)) );
-	d = max(d, -box(p+vec3(14.5,-3.5,0.), vec3(.4,.4,2.)) );
-	d = max(d, -box(p+vec3(11.5,-3.5,0.), vec3(1.4,.4,2.)) );
-	d = max(d, -box(p+vec3(5.5,-3.5,0.), vec3(2.4,.4,2.)) );
-	d = max(d, -box(p+vec3(0.5,-3.5,0.), vec3(.4,.4,2.)) );
-	d = max(d, -box(p+vec3(15.5,-1.5,0.), vec3(.4,1.4,2.)) );
-	d = max(d, -box(p+vec3(13.5,-1.5,0.), vec3(.4,1.4,2.)) );
-	d = max(d, -box(p+vec3(11.5,-1.5,0.), vec3(.4,1.4,2.)) );
-	d = max(d, -box(p+vec3(6.5,-1.5,0.), vec3(.4,1.4,2.)) );
-	d = max(d, -box(p+vec3(4.5,-1.5,0.), vec3(.4,1.4,2.)) );
-	d = max(d, -box(p+vec3(9.,-.5,0.), vec3(.9,.4,2.)) );
-	d = max(d, -box(p+vec3(9.,-2.5,0.), vec3(.9,.4,2.)) );
-	d = max(d, -box(p+vec3(2.,-1.5,0.), vec3(.9,1.4,3.)) );
-	d = max(d, -box(p+vec3(5.,-2.5,0.), vec3(.9,.4,3.)) );
-	d = min(d, (flame(p+vec3(17./2.,0.,0.))));
-	return d;
+
+
+
+
+  return d;
 }
 
 vec3 raymarch(in vec3 org, in vec3 dir)
