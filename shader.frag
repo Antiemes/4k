@@ -1,6 +1,6 @@
 uniform float t;
 
-#define iTIme t
+#define iTime t
 
 bool sc[128]=bool[128](
 false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, false, true,  true,  false, 
