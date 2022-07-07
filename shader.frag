@@ -2,23 +2,6 @@
 
 uniform float t;
 
-bool sc[128]=bool[128](
-false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, false, true,  true,  false, 
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  true,  true,  true,  
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
-true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
-false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, true,  false, false, true
-);
-
-vec3 hsv2rgb(vec3 c)
-{
-    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-}
 float box( vec3 p, vec3 s )
 {
   return length(max(abs(p)-s,0.0))-.1;
@@ -44,78 +27,32 @@ float flame(vec3 p)
 	return d + (noise(p+vec3(.0,-t*4.,.0)) + noise(p*3.)*.5)*.15*(p.y-2.) ;
 }
 
-float map(in vec3 p, inout vec3 color)
+float map( in vec3 p )
 {
-
-    float d2;
-	p.x -= 0./2.;
+	p.x -= 17./2.;
 	float d = 999999.;
-	vec3 pp = p-vec3(0./2.,0.,0.);
-    vec3 pos = vec3(0.);
-    pos = floor(p);
-    pp = fract(p) - vec3(.5);
-	//pp.x = modf(p.x, pos.x)-.5;
-  //  pp.y = modf(p.y, pos.y)-.5;
-    
-   
-    //vec3 pos = p - pp;
-	//d = box(pp,vec3(.3, .3, 1. + .2 * noise(pos))) ;
-    d = box(pp, vec3(.3, .3, 1.));
-
-	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
-    float h2 = noise(pos);
-    float h = mix(h1, h2, abs(sin(t * 1.5 - 1.)));
-    vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
-    vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
-    vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
-
-    color = hsv2rgb(vec3(h, 2., .3));
-    
-    //color = mix(color, color2, pow(sin(t * 1.5), 5.));
-
-    int xx = int(mod(pos.x - 5., 20.));
-    int yy = int(pos.y - 9.);
-
-    if (xx >= 0 && xx < 16 && yy >= 0 && yy < 8)
-    {
-      int i = xx + (7 - yy) * 16;
-
-      if (sc[i])
-      {
-          float ss = .3 + min(pow(sin(t * 1.5 * 4. - 4.0), 24.), .9) * .1;
-          d2 = box(pp, vec3(ss, ss, 1.1));
-          if (d2<d)
-          {
-            d=d2;
-            color = hsv2rgb(vec3(sin(t), .4, .9));
-          }
-      }
-    }
-    
-    
-    //d = box(p+vec3(5.,-2.5,0.), vec3(.4, .4, 1.));
-    /*d2 = box(p+vec3(6.5,-2.5,0.), vec3(.4, .4, 1.));
-    if (d2<d)
-    {
-        d=d2;
-        color = vec3(.2, .5, .8);
-    }
-    d2 = box(p+vec3(3.5,-.5,0.), vec3(.4, .4, 1.));
-    if (d2<d)
-    {
-        d=d2;
-        color = vec3(.5, .8, .1);
-    }
-    */
-    //d2 = sphere(p+vec3(sin(t *  3.0) * 5.0, 0., 0.), vec4(.4 - sin(t), .4, 1., 1.));
-    
-    /*if (d2<d)
-    {
-        d=d2;
-        color = vec3(.9, .2, .1);
-    }*/
-    
-	//d = min(d, (flame(p+vec3(17./2.,0.,0.))));
+	vec3 pp = p-vec3(17./2.,0.,0.);
+	pp.xy = mod(p.xy,vec2(1.))-.5;
+	d = min(d, box(pp,vec3(.3,.3,1.)) );
+	d = max(d, p.x);
+	d = max(d, -p.x-17.);
+	d = max(d, p.y-4.);
+	d = max(d, -p.y);
+	d = max(d, -box(p+vec3(16.5,-3.5,0.), vec3(.4,.4,2.)) );
+	d = max(d, -box(p+vec3(14.5,-3.5,0.), vec3(.4,.4,2.)) );
+	d = max(d, -box(p+vec3(11.5,-3.5,0.), vec3(1.4,.4,2.)) );
+	d = max(d, -box(p+vec3(5.5,-3.5,0.), vec3(2.4,.4,2.)) );
+	d = max(d, -box(p+vec3(0.5,-3.5,0.), vec3(.4,.4,2.)) );
+	d = max(d, -box(p+vec3(15.5,-1.5,0.), vec3(.4,1.4,2.)) );
+	d = max(d, -box(p+vec3(13.5,-1.5,0.), vec3(.4,1.4,2.)) );
+	d = max(d, -box(p+vec3(11.5,-1.5,0.), vec3(.4,1.4,2.)) );
+	d = max(d, -box(p+vec3(6.5,-1.5,0.), vec3(.4,1.4,2.)) );
+	d = max(d, -box(p+vec3(4.5,-1.5,0.), vec3(.4,1.4,2.)) );
+	d = max(d, -box(p+vec3(9.,-.5,0.), vec3(.9,.4,2.)) );
+	d = max(d, -box(p+vec3(9.,-2.5,0.), vec3(.9,.4,2.)) );
+	d = max(d, -box(p+vec3(2.,-1.5,0.), vec3(.9,1.4,3.)) );
+	d = max(d, -box(p+vec3(5.,-2.5,0.), vec3(.9,.4,3.)) );
+	d = min(d, (flame(p+vec3(17./2.,0.,0.))));
 	return d;
 }
 
@@ -123,11 +60,10 @@ vec3 raymarch(in vec3 org, in vec3 dir)
 {
 	float d = 0.0, glow = 0.0, eps = 0.02;
 	vec3  p = org;
-    vec3 color;
 	
-	for(int i=0; i<255; i++)
+	for(int i=0; i<64; i++)
 	{
-		d = map(p, color) + eps;
+		d = map(p) + eps;
 		p += d * dir;
 		if( d<eps )
 			break;
@@ -137,61 +73,51 @@ vec3 raymarch(in vec3 org, in vec3 dir)
 vec3 normal(in vec3 p)
 {
     vec3 eps = vec3(0.01,0.0,0.0);
-    vec3 color;
     return normalize(vec3(
-        map(p+eps.xyy, color)-map(p-eps.xyy, color),
-        map(p+eps.yxy, color)-map(p-eps.yxy, color),
-        map(p+eps.yyx, color)-map(p-eps.yyx, color)
+        map(p+eps.xyy)-map(p-eps.xyy),
+        map(p+eps.yxy)-map(p-eps.yxy),
+        map(p+eps.yyx)-map(p-eps.yyx)
     ));
 }
 float ambiantOcclusion( in vec3 p, in vec3 n, in float d)
 {
     float dlt = 0.1;
     float oc = 1.0;
-    vec3 color;
     
     for(int i=1; i<=6; i++)
     {
-		float dist = abs(map(p+n*dlt, color));
+		float dist = abs(map(p+n*dlt));
 		dlt += dist;
-		oc += map(p+n*dlt, color)+dist;
+		oc += map(p+n*dlt)+dist;
     }
     oc /= 6.;
     
     return 1. - exp(-oc*d);
 }
 
-//void mainImage( out vec4 fragColor, in vec2 fragCoord )
 void main()
 {
   vec2 iResolution = vec2(1920., 1080.);
 	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
 	v.x *= iResolution.x/iResolution.y;
 	vec3 col = vec3(0.);
-	vec3 org = vec3(0. + abs(sin(t * 1.5)) * 8.0 + t * 2.8 * 4.0, 13.0, 8.);
-	//vec3 org = vec3(0., 0., 6.);
+	vec3 org = vec3(0.,2.5,8.);
 	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
-    vec3 color;
 
 
 	vec3 p = raymarch(org,dir);
 	vec3 n = normal(p);
 	col = vec3(0.) ;
-	//float f = flame(p);
-	//f = 1.;
-    //if(f<.1)
-	//{
-	//	col = vec3(1.,.5,.1);
-	//}
-	//else
-    if(map(p, color)<.1)
+	float f = flame(p);
+	if(f<.1)
 	{
-    //    col = -color * 1.3;
-		//col += ambiantOcclusion(p,-dir,1.5) / 1.5;
-		//col *= ambiantOcclusion(p,n,1.5);
-		//col += color * 2.2;
-    col = color;
-		//col += color / (.5+pow(f,2.));
+		col = vec3(1.,.5,.1);
+	}
+	else if(map(p)<.1)
+	{
+		col += ambiantOcclusion(p,-dir,1.5);
+		col *= ambiantOcclusion(p,n,1.5);
+		col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
