@@ -136,7 +136,6 @@ void main()
   vec2 iResolution = vec2(1920., 1080.);
 	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
 	v.x *= iResolution.x/iResolution.y;
-	vec3 color;
 	//vec3 org = vec3(0.,2.5,8.);
 	vec3 org = vec3(0.,7.5,8.);
 	//vec3 org = vec3(0. + abs(sin(t * 1.5)) * 8.0 + t * 2.8 * 4.0, 13.0, 8.);
@@ -145,13 +144,9 @@ void main()
 
 	vec3 p = raymarch(org,dir);
 	vec3 n = normal(p);
-	col = vec3(0.) ;
+	vec3 col;
 	float f = flame(p);
-	if(f<.1)
-	{
-		col = vec3(1.,.5,.1);
-	}
-	else if(map(p, col)<.1)
+	if(map(p, col)<.1)
 	{
 		col += ambiantOcclusion(p,-dir,1.5);
 		col *= ambiantOcclusion(p,n,1.5);
