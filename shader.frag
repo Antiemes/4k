@@ -186,10 +186,11 @@ void main()
 	//else
     if(map(p, color)<.1)
 	{
-        col = -color * 1.3;
-		col += ambiantOcclusion(p,-dir,1.5) / 1.5;
-		col *= ambiantOcclusion(p,n,1.5);
-		col += color * 2.2;
+    //    col = -color * 1.3;
+		//col += ambiantOcclusion(p,-dir,1.5) / 1.5;
+		//col *= ambiantOcclusion(p,n,1.5);
+		//col += color * 2.2;
+    col = color;
 		//col += color / (.5+pow(f,2.));
 	}
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
