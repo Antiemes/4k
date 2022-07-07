@@ -52,8 +52,8 @@ float map(in vec3 p, inout vec3 color)
 	float d = 999999.;
 	vec3 pp = p-vec3(0./2.,0.,0.);
     vec3 pos = vec3(0.);
-	pp.x = modf(p.x, pos.x)-.5;
-    pp.y = modf(p.y, pos.y)-.5;
+	//pp.x = modf(p.x, pos.x)-.5;
+  //  pp.y = modf(p.y, pos.y)-.5;
     
    
     //vec3 pos = p - pp;
