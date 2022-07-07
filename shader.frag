@@ -44,7 +44,7 @@ float flame(vec3 p)
 	return d + (noise(p+vec3(.0,-t*4.,.0)) + noise(p*3.)*.5)*.15*(p.y-2.) ;
 }
 
-float map( in vec3 p )
+float map( in vec3 p, inout vec3 color)
 {
   float d2;
 	p.x -= 17./2.;
@@ -94,10 +94,11 @@ vec3 raymarch(in vec3 org, in vec3 dir)
 {
 	float d = 0.0, glow = 0.0, eps = 0.02;
 	vec3  p = org;
+  vec3 color;
 	
 	for(int i=0; i<64; i++)
 	{
-		d = map(p) + eps;
+		d = map(p, color) + eps;
 		p += d * dir;
 		if( d<eps )
 			break;
@@ -108,21 +109,22 @@ vec3 normal(in vec3 p)
 {
     vec3 eps = vec3(0.01,0.0,0.0);
     return normalize(vec3(
-        map(p+eps.xyy)-map(p-eps.xyy),
-        map(p+eps.yxy)-map(p-eps.yxy),
-        map(p+eps.yyx)-map(p-eps.yyx)
+        map(p+eps.xyy, color)-map(p-eps.xyy, color),
+        map(p+eps.yxy, color)-map(p-eps.yxy, color),
+        map(p+eps.yyx, color)-map(p-eps.yyx, color)
     ));
 }
 float ambiantOcclusion( in vec3 p, in vec3 n, in float d)
 {
     float dlt = 0.1;
     float oc = 1.0;
+    vec3 color;
     
     for(int i=1; i<=6; i++)
     {
-		float dist = abs(map(p+n*dlt));
+		float dist = abs(map(p+n*dlt, color));
 		dlt += dist;
-		oc += map(p+n*dlt)+dist;
+		oc += map(p+n*dlt, color)+dist;
     }
     oc /= 6.;
     
@@ -134,7 +136,7 @@ void main()
   vec2 iResolution = vec2(1920., 1080.);
 	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
 	v.x *= iResolution.x/iResolution.y;
-	vec3 col = vec3(0.);
+	vec3 color;
 	//vec3 org = vec3(0.,2.5,8.);
 	vec3 org = vec3(0.,7.5,8.);
 	//vec3 org = vec3(0. + abs(sin(t * 1.5)) * 8.0 + t * 2.8 * 4.0, 13.0, 8.);
@@ -149,11 +151,11 @@ void main()
 	{
 		col = vec3(1.,.5,.1);
 	}
-	else if(map(p)<.1)
+	else if(map(p, color)<.1)
 	{
 		col += ambiantOcclusion(p,-dir,1.5);
 		col *= ambiantOcclusion(p,n,1.5);
-		col += vec3(1.,.5,.1) / (.5+pow(f,2.));
+		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
