@@ -63,7 +63,7 @@ float map( in vec3 p, inout vec3 color)
     vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
     vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
 
-    vec3 color = hsv2rgb(vec3(h, 2., .3));
+    color = hsv2rgb(vec3(h, 2., .3));
     
     //color = mix(color, color2, pow(sin(t * 1.5), 5.));
 
@@ -107,6 +107,7 @@ vec3 raymarch(in vec3 org, in vec3 dir)
 }
 vec3 normal(in vec3 p)
 {
+  vec3 color;
     vec3 eps = vec3(0.01,0.0,0.0);
     return normalize(vec3(
         map(p+eps.xyy, color)-map(p-eps.xyy, color),
