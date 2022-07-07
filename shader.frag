@@ -50,10 +50,41 @@ float map( in vec3 p )
 	p.x -= 17./2.;
 	float d = 999999.;
 	vec3 pp = p-vec3(17./2.,0.,0.);
+  vec3 pos = floor(p);
 	pp.xy = mod(p.xy,vec2(1.))-.5;
-	d = min(d, box(pp,vec3(.3,.3,1.)) );
+
+  d = min(d, box(pp,vec3(.3,.3,1.)) );
 
 
+	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
+    float h2 = noise(pos);
+    float h = mix(h1, h2, abs(sin(t * 1.5 - 1.)));
+    vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
+    vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
+    vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
+
+    vec3 color = hsv2rgb(vec3(h, 2., .3));
+    
+    //color = mix(color, color2, pow(sin(t * 1.5), 5.));
+
+    int xx = int(mod(pos.x - 5., 20.));
+    int yy = int(pos.y - 9.);
+
+    if (xx >= 0 && xx < 16 && yy >= 0 && yy < 8)
+    {
+      int i = xx + (7 - yy) * 16;
+
+      if (sc[i])
+      {
+          float ss = .3 + min(pow(sin(t * 1.5 * 4. - 4.0), 24.), .9) * .1;
+          d2 = box(pp, vec3(ss, ss, 1.1));
+          if (d2<d)
+          {
+            d=d2;
+            color = hsv2rgb(vec3(sin(t), .4, .9));
+          }
+      }
+    }
 
 
   return d;
