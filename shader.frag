@@ -1,127 +1,194 @@
 uniform float t;
 
-float hash1(float f) { return fract(sin(f)*68354.452); }
-float hash2(vec2 v) { return hash1(dot(v, vec2(37.467,63.534))); } 
+#define iTIme t
 
-const vec3 E = vec3(.0, .001, 1.);
+bool sc[128]=bool[128](
+false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, false, true,  true,  false, 
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  true,  true,  true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, true,  false, false, true
+);
 
-float noise2(vec2 v) {
-    vec2 V=floor(v); v-=V;
-    v *= v * (3. - 2. * v);
-    return mix(
-        mix(hash2(V), hash2(V+E.zx), v.x),
-        mix(hash2(V+E.xz), hash2(V+E.zz), v.x), v.y);
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+float box( vec3 p, vec3 s )
+{
+  return length(max(abs(p)-s,0.0))-.1;
+}
+float noise(vec3 p) //Thx to Las^Mercury
+{
+	vec3 i = floor(p);
+	vec4 a = dot(i, vec3(1., 57., 21.)) + vec4(0., 57., 21., 78.);
+	vec3 f = cos((p-i)*acos(-1.))*(-.5)+.5;
+	a = mix(sin(cos(a)*a),sin(cos(1.+a)*(1.+a)), f.x);
+	a.xy = mix(a.xz, a.yw, f.y);
+	return mix(a.x, a.y, f.z);
 }
 
-const float PI2 = 3.1415926 * 2.;
-
-vec3 iqcolor(vec3 a, vec3 b, vec3 c, vec3 d, float t) {
-    return a + b * cos(PI2 * (c + t * d));
+float sphere(vec3 p, vec4 spr)
+{
+	return length(spr.xyz-p) - spr.w;
 }
 
-vec3 c1(float t) {
-	return iqcolor(vec3(0.5, 0.5, 0.5),
-                   vec3(0.5, 0.5, 0.5),
-                   vec3(1.0, 1.0, 1.0),
-                   vec3(0.00, 0.33, 0.67), t);
+float flame(vec3 p)
+{
+	float d = sphere(p*vec3(1.,.5,1.), vec4(3.,2.,.0,1.));
+	return d + (noise(p+vec3(.0,-iTime*4.,.0)) + noise(p*3.)*.5)*.15*(p.y-2.) ;
 }
 
-vec3 rep3(vec3 p, vec3 s) {
-    return mod(p, s) - s * .5;
+float map(in vec3 p, inout vec3 color)
+{
+
+    float d2;
+	p.x -= 0./2.;
+	float d = 999999.;
+	vec3 pp = p-vec3(0./2.,0.,0.);
+    vec3 pos = vec3(0.);
+	pp.x = modf(p.x, pos.x)-.5;
+    pp.y = modf(p.y, pos.y)-.5;
+    
+   
+    //vec3 pos = p - pp;
+	//d = box(pp,vec3(.3, .3, 1. + .2 * noise(pos))) ;
+    d = box(pp, vec3(.3, .3, 1.));
+
+	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
+    float h2 = noise(pos);
+    float h = mix(h1, h2, abs(sin(iTime * 1.5 - 1.)));
+    vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
+    vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
+    vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
+
+    color = hsv2rgb(vec3(h, 2., .3));
+    
+    //color = mix(color, color2, pow(sin(iTime * 1.5), 5.));
+
+    int xx = int(mod(pos.x - 5., 20.));
+    int yy = int(pos.y - 9.);
+
+    if (xx >= 0 && xx < 16 && yy >= 0 && yy < 8)
+    {
+      int i = xx + (7 - yy) * 16;
+
+      if (sc[i])
+      {
+          float ss = .3 + min(pow(sin(iTime * 1.5 * 4. - 4.0), 24.), .9) * .1;
+          d2 = box(pp, vec3(ss, ss, 1.1));
+          if (d2<d)
+          {
+            d=d2;
+            color = hsv2rgb(vec3(sin(iTime), .4, .9));
+          }
+      }
+    }
+    
+    
+    //d = box(p+vec3(5.,-2.5,0.), vec3(.4, .4, 1.));
+    /*d2 = box(p+vec3(6.5,-2.5,0.), vec3(.4, .4, 1.));
+    if (d2<d)
+    {
+        d=d2;
+        color = vec3(.2, .5, .8);
+    }
+    d2 = box(p+vec3(3.5,-.5,0.), vec3(.4, .4, 1.));
+    if (d2<d)
+    {
+        d=d2;
+        color = vec3(.5, .8, .1);
+    }
+    */
+    //d2 = sphere(p+vec3(sin(iTime *  3.0) * 5.0, 0., 0.), vec4(.4 - sin(iTime), .4, 1., 1.));
+    
+    /*if (d2<d)
+    {
+        d=d2;
+        color = vec3(.9, .2, .1);
+    }*/
+    
+	//d = min(d, (flame(p+vec3(17./2.,0.,0.))));
+	return d;
 }
 
-float vmax(vec3 p) { return max(max(p.x, p.y), p.z); }
-float box3(vec3 p, vec3 s) {
-    return vmax(abs(p) - s);
+vec3 raymarch(in vec3 org, in vec3 dir)
+{
+	float d = 0.0, glow = 0.0, eps = 0.02;
+	vec3  p = org;
+    vec3 color;
+	
+	for(int i=0; i<255; i++)
+	{
+		d = map(p, color) + eps;
+		p += d * dir;
+		if( d<eps )
+			break;
+	}
+	return p;
 }
-
-mat2 Rm(float a) { float c=cos(a), s=sin(a); return mat2(c,s,-s,c); }
-
-mat2 bm;
-
-float PI = 3.1415926;
-
-float wball;
-float wgnd;
-float w(vec3 p) {
-    vec3 bp = p;
-    bp.xz *= bm;
-    bp.yz *= bm;
-    float box = box3(bp, vec3(.5));
-		float phase = t/8., ph = fract(phase) ;
-		phase = floor(phase) + mix(ph, ph * ph, step(32., t));
-    wball = length(rep3(p, vec3(.4 + .1*sin(phase * PI * 2.)))) - .15;
-    float h = noise2(p.xz) + .25 * noise2(p.xz*2.3+vec2(t));
-    wgnd = p.y + .5 + h*h;
-    //max(ball, p.y - .8 * sin(t))
-    return min(max(wball, box), wgnd);
-}
-
-vec3 wn(vec3 p) {
+vec3 normal(in vec3 p)
+{
+    vec3 eps = vec3(0.01,0.0,0.0);
+    vec3 color;
     return normalize(vec3(
-        w(p+E.yxx), w(p+E.xyx), w(p+E.xxy)) - w(p)); //xyzw rgba
+        map(p+eps.xyy, color)-map(p-eps.xyy, color),
+        map(p+eps.yxy, color)-map(p-eps.yxy, color),
+        map(p+eps.yyx, color)-map(p-eps.yyx, color)
+    ));
+}
+float ambiantOcclusion( in vec3 p, in vec3 n, in float d)
+{
+    float dlt = 0.1;
+    float oc = 1.0;
+    vec3 color;
+    
+    for(int i=1; i<=6; i++)
+    {
+		float dist = abs(map(p+n*dlt, color));
+		dlt += dist;
+		oc += map(p+n*dlt, color)+dist;
+    }
+    oc /= 6.;
+    
+    return 1. - exp(-oc*d);
 }
 
-//void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-void main() {
-    // Normalized pixel coordinates (from 0 to 1)
-		vec2 iResolution = vec2(1920., 1080.);
-    vec2 uv = gl_FragCoord.xy/iResolution.xy - .5;
-    uv.x *= iResolution.x / iResolution.y;
-    
-    //fragColor = vec4(noise2(uv*5.)); return;
-    
-    //t = iTime;
-    bm = Rm(t/4.);
+//void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
+{
+  vec2 iResolution = vec2(1920., 1080.);
+	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
+	v.x *= iResolution.x/iResolution.y;
+	vec3 col = vec3(0.);
+	vec3 org = vec3(0. + abs(sin(iTime * 1.5)) * 8.0 + iTime * 2.8 * 4.0, 13.0, 8.);
+	//vec3 org = vec3(0., 0., 6.);
+	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
+    vec3 color;
 
-	vec3 skycolor = vec3(.4, .7, .9);
-    vec3 C = skycolor;
-  
-    mat2 mc = Rm(.2), mc2 = Rm(t/8.);
-    vec3 O = vec3(0., 0., 3.);
-    vec3 D = normalize(vec3(uv, -2.));
-   	O.yz *= mc; D.yz *= mc;
-    O.xz *= mc2; D.xz *= mc2;
-    
-    float L = 10.;
-    float i, d, l = 0.;
-    vec3 P;
-    float Ni = 200.;
-    for (i = 0.; i < Ni; ++i) {
-        P = O + D * l;
-        d = w(P);
-        l += d * .6;
-        if (d < .001 * l || l > L) break;
-    }
 
-    if (l < L) {
-        float spec = 25.;
-        vec3 alb = vec3(1.);
-        
-        if (d == wgnd) {
-            alb = c1(P.y-3.);//vec3(.5, .8, .6);
-        }
-        
-        vec3 N = wn(P);
-        
-        //vec3 sundir = normalize(vec3(sin(t), 1., cos(t)));
-        vec3 sundir = normalize(vec3(1.));//sin(t), 1., cos(t)));
-       	vec3 h = normalize(sundir-D);
-
-        vec3 suncolor = vec3(.9, .8, .5);
-        vec3 mc = vec3(1.) * suncolor;
-        
-        vec3 c = suncolor * alb * (
-           max(0., dot(N, sundir)) + pow(max(0., dot(N, h)), spec));
-        
-        c += alb * skycolor * max(N.y, 0.);
-        c += 2. * float(i/Ni);
-        
-        C = mix(C, c, smoothstep(L, L*.5, l));
-    }
-
-		C *= pow(smoothstep(0., 32., t), 2.);
-
-    // Output to screen
-    gl_FragColor = vec4(sqrt(C), .0);
+	vec3 p = raymarch(org,dir);
+	vec3 n = normal(p);
+	col = vec3(0.) ;
+	//float f = flame(p);
+	//f = 1.;
+    //if(f<.1)
+	//{
+	//	col = vec3(1.,.5,.1);
+	//}
+	//else
+    if(map(p, color)<.1)
+	{
+        col = -color * 1.3;
+		col += ambiantOcclusion(p,-dir,1.5) / 1.5;
+		col *= ambiantOcclusion(p,n,1.5);
+		col += color * 2.2;
+		//col += color / (.5+pow(f,2.));
+	}
+	gl_FragColor = vec4(col*min(iTime*.25,1.), 1.);
 }
