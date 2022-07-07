@@ -2,6 +2,23 @@
 
 uniform float t;
 
+bool sc[128]=bool[128](
+false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, false, true,  true,  false, 
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  true,  true,  true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+true,  false, false, false, false, true,  false, true,  false, false, false, false, true,  false, false, true,  
+false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, true,  false, false, true
+);
+
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
 float box( vec3 p, vec3 s )
 {
   return length(max(abs(p)-s,0.0))-.1;
