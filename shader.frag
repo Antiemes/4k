@@ -118,7 +118,8 @@ void main()
 	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
 	v.x *= iResolution.x/iResolution.y;
 	vec3 col = vec3(0.);
-	vec3 org = vec3(0.,2.5,8.);
+	//vec3 org = vec3(0.,2.5,8.);
+	vec3 org = vec3(0. + abs(sin(t * 1.5)) * 8.0 + t * 2.8 * 4.0, 13.0, 8.);
 	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
 
 
