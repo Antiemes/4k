@@ -190,6 +190,5 @@ void main()
 		col += color * 2.2;
 		//col += color / (.5+pow(f,2.));
 	}
-  col = vec3(.8, .1, .2);
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
