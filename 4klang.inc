@@ -8,7 +8,7 @@
 %define MAX_VOICES 1
 %define HLD 1
 %define BPM 155.000000
-%define MAX_PATTERNS 25
+%define MAX_PATTERNS 49
 %define PATTERN_SIZE_SHIFT 4
 %define PATTERN_SIZE (1 << PATTERN_SIZE_SHIFT)
 %define	MAX_TICKS (MAX_PATTERNS*PATTERN_SIZE)
@@ -17,8 +17,8 @@
 %define	MAX_SAMPLES	(SAMPLES_PER_TICK*MAX_TICKS)
 ;%define 	GO4K_USE_16BIT_OUTPUT
 ;%define 	GO4K_USE_GROOVE_PATTERN
-%define 	GO4K_USE_ENVELOPE_RECORDINGS
-%define 	GO4K_USE_NOTE_RECORDINGS
+;%define 	GO4K_USE_ENVELOPE_RECORDINGS
+;%define 	GO4K_USE_NOTE_RECORDINGS
 %define 	GO4K_CLIP_OUTPUT
 %define 	GO4K_USE_DST
 %define 	GO4K_USE_DLL
@@ -467,18 +467,33 @@ go4k_patterns
 	db	90, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
 	db	88, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 86, HLD, HLD, HLD, 
 	db	88, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
-	db	79, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
-	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 81, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 90, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	84, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
 	db	83, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	85, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	86, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 81, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	88, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 0, 0, 
+	db	79, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
 	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 76, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
 	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 81, HLD, HLD, HLD, 79, HLD, HLD, HLD, 
 	db	81, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 79, HLD, HLD, HLD, 
+	db	81, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 78, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 72, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	79, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 0, 0, 
 	db	0, 0, 0, 0, 0, 0, 79, HLD, 79, HLD, 81, HLD, HLD, HLD, HLD, HLD, 
 	db	HLD, HLD, 76, HLD, 76, HLD, 76, HLD, HLD, HLD, 76, HLD, HLD, HLD, 74, HLD, 
 	db	HLD, HLD, 71, HLD, 71, HLD, 71, HLD, HLD, HLD, HLD, HLD, 83, HLD, 81, HLD, 
 	db	83, HLD, HLD, HLD, HLD, HLD, 83, HLD, HLD, HLD, 83, HLD, HLD, HLD, 81, HLD, 
 	db	83, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 83, HLD, 81, HLD, HLD, HLD, 78, HLD, 
 	db	HLD, HLD, HLD, HLD, 78, HLD, 76, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, 90, HLD, 88, HLD, 90, HLD, HLD, HLD, 93, HLD, 90, HLD, 
+	db	HLD, HLD, 90, HLD, HLD, HLD, 88, HLD, 90, HLD, HLD, HLD, 88, HLD, 86, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, 88, HLD, 88, HLD, 90, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, 88, HLD, 90, HLD, 83, HLD, HLD, HLD, 83, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 86, HLD, 83, HLD, 
+	db	86, HLD, HLD, HLD, HLD, HLD, 86, HLD, HLD, HLD, 86, HLD, HLD, HLD, 84, HLD, 
+	db	86, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 83, HLD, 81, HLD, HLD, HLD, 78, HLD, 
 	db	72, HLD, HLD, HLD, 72, HLD, HLD, HLD, 72, HLD, 72, HLD, HLD, HLD, 72, HLD, 
 	db	HLD, HLD, 72, HLD, HLD, HLD, 72, HLD, 72, HLD, HLD, HLD, 72, HLD, 72, HLD, 
 	db	71, HLD, HLD, HLD, 71, HLD, HLD, HLD, 71, HLD, 71, HLD, 69, HLD, 71, HLD, 
@@ -492,6 +507,9 @@ go4k_patterns
 	db	HLD, HLD, 74, HLD, HLD, HLD, 74, HLD, 74, HLD, HLD, HLD, 78, HLD, 79, HLD, 
 	db	73, HLD, HLD, HLD, 73, HLD, HLD, HLD, 73, HLD, 73, HLD, HLD, HLD, 73, HLD, 
 	db	HLD, HLD, 73, HLD, HLD, HLD, 73, HLD, 73, HLD, HLD, HLD, 74, HLD, 74, HLD, 
+	db	HLD, HLD, 72, HLD, HLD, HLD, 72, HLD, 69, HLD, HLD, HLD, 69, HLD, 69, HLD, 
+	db	69, HLD, HLD, HLD, 69, HLD, HLD, HLD, 71, HLD, 71, HLD, HLD, HLD, 71, HLD, 
+	db	72, HLD, HLD, HLD, 72, HLD, HLD, HLD, 72, HLD, 72, HLD, HLD, HLD, 72, 0, 
 	db	76, HLD, HLD, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, HLD, HLD, 76, HLD, 
 	db	HLD, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, 
 	db	76, HLD, HLD, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, 74, HLD, 76, HLD, 
@@ -502,12 +520,15 @@ go4k_patterns
 	db	HLD, HLD, 78, HLD, HLD, HLD, 78, HLD, 78, HLD, HLD, HLD, 79, HLD, 81, HLD, 
 	db	79, HLD, HLD, HLD, 79, HLD, HLD, HLD, 79, HLD, 79, HLD, HLD, HLD, 79, HLD, 
 	db	HLD, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, HLD, HLD, 78, HLD, 79, HLD, 
+	db	HLD, HLD, 78, HLD, HLD, HLD, 78, HLD, 78, HLD, HLD, HLD, 78, HLD, 79, HLD, 
+	db	76, HLD, HLD, HLD, 76, HLD, HLD, HLD, 76, HLD, 76, HLD, HLD, HLD, 76, 0, 
 	db	60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0, 
 	db	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, HLD, HLD, HLD, 
 	db	HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 60, HLD, HLD, HLD, 
 	db	HLD, HLD, 60, HLD, HLD, HLD, 60, HLD, 60, 60, 60, HLD, 60, HLD, 60, HLD, 
 	db	0, 0, 0, 0, 60, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 60, HLD, HLD, HLD, 
 	db	HLD, HLD, HLD, HLD, 60, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 60, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, 60, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 60, HLD, 0, 0, 
 	db	60, 0, 60, 0, 60, 0, 60, 0, 60, 0, 60, 0, 60, 0, 60, 0, 
 	db	60, 0, 60, 0, 60, 0, 60, 0, 60, 0, 60, HLD, 60, 0, 60, HLD, 
 	db	48, HLD, HLD, HLD, 48, HLD, HLD, HLD, 55, HLD, 48, HLD, 46, HLD, 48, HLD, 
@@ -517,6 +538,10 @@ go4k_patterns
 	db	55, HLD, HLD, HLD, 55, HLD, HLD, HLD, 62, HLD, 60, HLD, 53, HLD, 55, HLD, 
 	db	50, HLD, 50, HLD, HLD, HLD, 52, HLD, 62, HLD, HLD, HLD, 48, HLD, 50, HLD, 
 	db	45, HLD, 45, HLD, HLD, HLD, 47, HLD, 57, HLD, HLD, HLD, 43, HLD, 45, HLD, 
+	db	HLD, HLD, 45, HLD, 38, HLD, HLD, HLD, 50, HLD, HLD, HLD, HLD, HLD, HLD, HLD, 
+	db	HLD, HLD, HLD, HLD, HLD, HLD, 50, HLD, 45, HLD, HLD, HLD, 45, HLD, 45, HLD, 
+	db	45, HLD, HLD, HLD, 45, HLD, HLD, HLD, 52, HLD, 64, HLD, 50, HLD, 52, HLD, 
+	db	48, HLD, HLD, HLD, 48, HLD, HLD, HLD, 55, HLD, 48, HLD, 46, HLD, 48, 0, 
 go4k_patterns_end
 %ifdef USE_SECTIONS
 section .g4kmuc2 data align=1
@@ -524,15 +549,15 @@ section .g4kmuc2 data align=1
 section .data
 %endif
 go4k_pattern_lists
-Instrument0List		db	1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 9, 10, 1, 2, 3, 4, 5, 6, 11, 12, 13, 
-Instrument1List		db	0, 0, 0, 0, 0, 0, 0, 0, 14, 15, 16, 17, 5, 4, 18, 19, 14, 15, 16, 17, 5, 4, 18, 19, 14, 
-Instrument2List		db	0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 21, 22, 23, 24, 25, 6, 0, 20, 21, 22, 23, 24, 25, 6, 0, 
-Instrument3List		db	26, 27, 28, 29, 30, 31, 32, 33, 26, 27, 34, 35, 32, 36, 37, 38, 26, 27, 34, 35, 32, 36, 32, 33, 26, 
-Instrument4List		db	39, 40, 41, 42, 43, 44, 45, 46, 39, 40, 39, 42, 47, 44, 39, 48, 39, 40, 39, 42, 47, 44, 45, 46, 39, 
-Instrument5List		db	49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 
-Instrument6List		db	0, 50, 6, 51, 6, 51, 6, 52, 53, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 
-Instrument7List		db	55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 56, 55, 
-Instrument8List		db	57, 58, 59, 60, 61, 6, 62, 6, 57, 58, 59, 60, 61, 6, 63, 6, 57, 58, 59, 60, 61, 6, 62, 6, 57, 
+Instrument0List		db	1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 9, 10, 1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 4, 6, 15, 16, 17, 18, 13, 14, 4, 6, 18, 6, 11, 12, 15, 19, 4, 14, 18, 6, 11, 12, 20, 
+Instrument1List		db	0, 0, 0, 0, 0, 0, 0, 0, 21, 19, 16, 22, 5, 4, 23, 24, 21, 19, 16, 22, 5, 4, 23, 24, 21, 19, 16, 22, 5, 4, 6, 25, 21, 19, 16, 22, 5, 4, 23, 24, 21, 26, 1, 6, 5, 4, 23, 24, 27, 
+Instrument2List		db	0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 29, 30, 31, 32, 33, 6, 0, 28, 29, 30, 31, 32, 33, 6, 0, 28, 29, 30, 31, 32, 33, 6, 0, 28, 29, 30, 31, 32, 34, 35, 13, 36, 37, 38, 39, 40, 34, 35, 20, 
+Instrument3List		db	41, 42, 43, 44, 45, 46, 47, 48, 41, 42, 49, 50, 47, 51, 52, 53, 41, 42, 49, 50, 47, 51, 47, 48, 41, 42, 49, 50, 47, 51, 52, 48, 41, 42, 49, 50, 47, 51, 47, 48, 41, 54, 55, 50, 47, 51, 47, 48, 56, 
+Instrument4List		db	57, 58, 59, 60, 61, 62, 63, 64, 57, 58, 57, 60, 65, 62, 57, 66, 57, 58, 57, 60, 65, 62, 63, 64, 57, 58, 57, 60, 65, 62, 57, 67, 57, 58, 57, 60, 65, 62, 63, 64, 57, 58, 57, 60, 65, 62, 63, 64, 68, 
+Instrument5List		db	69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 69, 
+Instrument6List		db	0, 70, 6, 71, 6, 71, 6, 72, 73, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 75, 
+Instrument7List		db	76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 77, 76, 
+Instrument8List		db	78, 79, 80, 81, 82, 6, 83, 6, 78, 79, 80, 81, 82, 6, 84, 6, 78, 79, 80, 81, 82, 6, 83, 6, 78, 79, 80, 81, 82, 6, 84, 85, 78, 79, 80, 81, 82, 6, 83, 6, 78, 86, 87, 81, 82, 6, 83, 6, 88, 
 go4k_pattern_lists_end
 %ifdef USE_SECTIONS
 section .g4kmuc3 data align=1
