@@ -286,6 +286,9 @@ GO4K_FST_ID		equ		7
 %endmacro
 %define	AMOUNT(val)		val
 %define	DEST(val)		val
+%define	FST_SET			0x0000
+%define	FST_ADD			0x4000
+%define	FST_POP			0x8000
 struc	go4kFST_val
 	.amount		resd	1
 	.op1		resd	1
