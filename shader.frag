@@ -149,7 +149,7 @@ void main()
 	float f = flame(p);
 	if(map(p, col)<.1)
 	{
-    col *= 0.5;
+    col *= 1.5;
 		col += ambiantOcclusion(p,-dir,1.5);
 		col *= ambiantOcclusion(p,n,1.5);
 		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
