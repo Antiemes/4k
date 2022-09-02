@@ -1,4 +1,4 @@
 git pull
-build-fast.bat
-intro-fast.exe
+call build-fast.bat
+call intro-fast.exe
 
