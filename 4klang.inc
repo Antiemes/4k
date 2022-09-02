@@ -47,6 +47,8 @@
 %define 	GO4K_USE_FSTG_CHECK
 %define		GO4K_USE_WAVESHAPER_CLIP
 %define	MAX_DELAY			65536
+%define MAX_UNITS			48
+%define	MAX_UNIT_SLOTS	    9
 %define MAX_WORKSPACE_SLOTS	8
 %define GO4K_BEGIN_CMDDEF(def_name)
 %define GO4K_END_CMDDEF db 0
