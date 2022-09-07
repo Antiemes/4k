@@ -47,7 +47,7 @@ float flame(vec3 p)
 
 float map( in vec3 p, inout vec3 color)
 {
-  float bass = clamp(pow(sin((t+0.625)*3.1415), 30.)*5., 0., 1.);
+  float bass = clamp(pow(sin((t+0.625)*PI), 30.)*5., 0., 1.);
   
   float d2;
 	p.x -= 17./2.;
@@ -81,7 +81,8 @@ float map( in vec3 p, inout vec3 color)
 
       if (sc[i])
       {
-          float ss = .3 + min(pow(sin(t * 1. * 4. - 4.0), 24.), .9) * .1;
+          //float ss = .3 + min(pow(sin(t * 1. * 4. - 4.0), 24.), .9) * .1;
+          float ss = .3 + bass*0.1;
           d2 = box(pp, vec3(ss, ss, 1.1));
           if (d2<d)
           {
