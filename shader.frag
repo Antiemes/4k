@@ -1,6 +1,7 @@
 #version 120
 
 uniform float t;
+#define PI 3.1415926538
 
 bool sc[128]=bool[128](
 false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, false, true,  true,  false, 
@@ -46,6 +47,8 @@ float flame(vec3 p)
 
 float map( in vec3 p, inout vec3 color)
 {
+  float bass = clamp(pow(sin((t+0.625)*3.1415), 30.)*5., 0., 1.);
+  
   float d2;
 	p.x -= 17./2.;
 	float d = 999999.;
@@ -60,12 +63,12 @@ float map( in vec3 p, inout vec3 color)
 
 	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
     float h2 = noise(pos);
-    float h = mix(h1, h2, abs(sin(t * 1. - 1.)));
+    float hue = mix(h1, h2, abs(sin(t * PI - 1.)));
     vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
     vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
     vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
 
-    color = hsv2rgb(vec3(h, 2., .3));
+    color = hsv2rgb(vec3(hue, 2., .3));
     
     //color = mix(color, color2, pow(sin(t * 1.5), 5.));
 
@@ -156,7 +159,6 @@ void main()
 		col *= ambiantOcclusion(p,n,1.5);
 		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
-  float beat = clamp(pow(sin((t+0.625)*3.1415), 30.)*5., 0., 1.);;
-  col = col*beat;
+  col = col;
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
