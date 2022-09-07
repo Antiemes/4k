@@ -53,11 +53,11 @@ float map( in vec3 p, inout vec3 color)
   vec3 pos = floor(p);
 	pp.xy = mod(p.xy,vec2(1.))-.5;
 
-  float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34));
+  float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34))*0.;
   d = min(d, box(pp,vec3(.3,.3+0.5*noise1,1.)) );
 
 
-	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435))*mod(t, 1.)*0.;
+	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
     float h2 = noise(pos);
     float h = mix(h1, h2, abs(sin(t * 1. - 1.)));
     vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
