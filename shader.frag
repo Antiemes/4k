@@ -156,7 +156,7 @@ void main()
 		col *= ambiantOcclusion(p,n,1.5);
 		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
-  float beat=mod(t, 1.);
+  float beat=1.-smoothstep(.0, .25, mod(t, 1.));
   col = col*beat;
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
