@@ -58,7 +58,7 @@ float map( in vec3 p, inout vec3 color)
 
 	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
     float h2 = noise(pos);
-    float h = mix(h1, h2, abs(sin(t * 1.5 - 1.)));
+    float h = mix(h1, h2, abs(sin(t * 1. - 1.)));
     vec3 c1 = hsv2rgb(vec3(.5, 1.4, .25));
     vec3 c2 = hsv2rgb(vec3(.64, 1.5, .4));
     vec3 color2 = mix(c1, c2, smoothstep(.15, .85, noise(pos)));
@@ -76,7 +76,7 @@ float map( in vec3 p, inout vec3 color)
 
       if (sc[i])
       {
-          float ss = .3 + min(pow(sin(t * 1.5 * 4. - 4.0), 24.), .9) * .1;
+          float ss = .3 + min(pow(sin(t * 1. * 4. - 4.0), 24.), .9) * .1;
           d2 = box(pp, vec3(ss, ss, 1.1));
           if (d2<d)
           {
@@ -139,7 +139,7 @@ void main()
 	v.x *= iResolution.x/iResolution.y;
 	//vec3 org = vec3(0.,2.5,8.);
 	//vec3 org = vec3(0., 12., 8.);
-	vec3 org = vec3(0. + abs(sin(t * 1.5 / 8.)) * 8.0 + t * 2.8 * 4.0 / 8., 12.0, 10.);
+	vec3 org = vec3(0. + abs(sin(t * 1. / 8.)) * 8.0 + t * 2. * 4.0 / 8., 12.0, 10.);
 	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
 
 
