@@ -53,7 +53,7 @@ float map( in vec3 p, inout vec3 color)
   vec3 pos = floor(p);
 	pp.xy = mod(p.xy,vec2(1.))-.5;
 
-  float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34))*0.;
+  float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34))*.mod(t, 1.);
   d = min(d, box(pp,vec3(.3,.3+0.5*noise1,1.)) );
 
 
