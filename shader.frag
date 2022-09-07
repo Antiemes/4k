@@ -53,8 +53,9 @@ float map( in vec3 p, inout vec3 color)
   vec3 pos = floor(p);
 	pp.xy = mod(p.xy,vec2(1.))-.5;
 
-  float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34))*(1.-smoothstep(.0, .1, mod(t/1., 1.)));
-  d = min(d, box(pp,vec3(.3,.3+0.5*noise1,1.)) );
+  //float noise1 = noise(vec3(p.x+345.34, p.y*345.34, t*345435.34))*(1.-smoothstep(.0, .1, mod(t/1., 1.)));
+  //d = min(d, box(pp,vec3(.3,.3+0.5*noise1,1.)) );
+  d = min(d, box(pp,vec3(.3,.3,1.)) );
 
 
 	float h1 = noise(pos + vec3(657.345, 345.256, 2435.2435));
@@ -155,5 +156,7 @@ void main()
 		col *= ambiantOcclusion(p,n,1.5);
 		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
+  float beat=mod(t, 1.);
+  col = col*beat;
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
 }
