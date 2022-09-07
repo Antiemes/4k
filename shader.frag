@@ -145,7 +145,7 @@ void main()
 	v.x *= iResolution.x/iResolution.y;
 	//vec3 org = vec3(0.,2.5,8.);
 	//vec3 org = vec3(0., 12., 8.);
-	vec3 org = vec3(0. + abs(sin(t * PI / 8.)) * 8.0 + t * 2.5, 12.0, 10.);
+	vec3 org = vec3(0. + abs(sin(t * PI / 8.)) * 8.0 + t * PI, 12.0, 10.);
 	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
 
 
