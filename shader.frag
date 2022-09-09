@@ -226,7 +226,6 @@ vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot
     return col*c;
 }
 
-
 vec3 hsv2rgb(vec3 c)
 {
     vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
@@ -354,9 +353,13 @@ float ambiantOcclusion( in vec3 p, in vec3 n, in float d)
 void main()
 {
   vec2 iResolution = vec2(1920., 1080.);
-	vec2 v = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
-	v.x *= iResolution.x/iResolution.y;
-	//vec3 org = vec3(0.,2.5,8.);
+	vec2 uv = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
+	uv.x *= iResolution.x/iResolution.y;
+
+
+/*
+
+  //vec3 org = vec3(0.,2.5,8.);
 	//vec3 org = vec3(0., 12., 8.);
 	vec3 org = vec3(-2. + abs(sin(t * PI / 8.)) * 8.0 + t * PI, 12.0, 10.);
 	vec3 dir = normalize( vec3( v.xy, -1.5+length(v)*.25 ) );
@@ -374,5 +377,17 @@ void main()
 		//col += vec3(1.,.5,.1) / (.5+pow(f,2.));
 	}
   col = col;
-	gl_FragColor = vec4(col*min(t*.25,1.), 1.);
+	gl_FragColor = vec4(col*min(t*.25,1.), 1.);*/
+
+  vec3 color = vec3(.0);
+
+  
+  
+  for (float numbers = 0.; numbers < t; numbers++)
+  {
+    color = max(color, lcd(uv, vec2(.2, .2) + vec2(numbers), vec3(.1, .016, .96), vec3(.26, .38, .3), .1,  0.5+0.5*sin(t), sin(t*3.), 0.));
+  }
+
+
+  gl_FragColor = vec4(color, 1.);
 }
