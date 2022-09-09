@@ -241,7 +241,7 @@ vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot
     vec3 r=col1;
     vec3 b=col2;
     vec3 col = vec3(hash13(vec3(uv*9873., t*99.45)));
-    float tt = t + hash11(t*3452. + 9384.);
+    float tt = t + hash11(t*3452. + 9384. + num * 1345. + col1.x * 2356.);
     if (sin(tt)*cos(tt*3.234+.34)+sin(tt*.235)<rnd)
     {
         col = 0.1 * col + r*value1 + b*value2;
