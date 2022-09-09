@@ -378,8 +378,8 @@ vec3 hsv2rgb(vec3 c)
 void main()
 {
   vec2 iResolution = vec2(1920., 1080.);
-	//vec2 uv = (gl_FragCoord.xy - iResolution.xy / 2.) / iResolution.y;
-	vec2 uv = (gl_FragCoord.xy - vec2(960., 540.)) / 540.;
+	vec2 uv = (gl_FragCoord.xy - iResolution.xy / 2.) / iResolution.y;
+	//vec2 uv = (gl_FragCoord.xy - vec2(960., 540.)) / 540.;
 	//uv.x *= iResolution.x/iResolution.y;
 
 
@@ -445,17 +445,6 @@ void main()
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
-  }
-
-  if (gl_FragCoord.x > 1600.)
-  //if (uv.x > 0.)
-  {
-    color.x = 1.;
-  }
-  if (gl_FragCoord.y > 50.)
-  //if (uv.y > 0.)
-  {
-    color.y = 1.;
   }
 
   gl_FragColor = vec4(color, 1.);
