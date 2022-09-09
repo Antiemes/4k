@@ -36,6 +36,13 @@ vec3 hash31(float p)
    return fract((p3.xxy+p3.yzz)*p3.zyx); 
 }
 
+float hash13(vec3 p3)
+{
+	p3  = fract(p3 * .1031);
+    p3 += dot(p3, p3.zyx + 31.32);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
 vec2 scrot(vec2 uv, float sc, float rot)
 {
     float s = sin(rot);
