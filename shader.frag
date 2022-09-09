@@ -427,13 +427,17 @@ void main()
   col2 = hash31(numbers * 2349. + 1239.);
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
+
+  mode = 0;
+
+
   for (int i=0; i<10; i++) dispnum[i]=float(i);
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
     if (mode == 0)
     {
-      scalefactor = hash11(float(i)*534.) + .2 + .2*sin(hash11(float(i)*345. + 45645.));
+      scalefactor = hash11(float(i)*534.) + .2 + .6*sin(hash11(float(i)*345. + 45645.));
     }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
