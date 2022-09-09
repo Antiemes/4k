@@ -14,6 +14,22 @@ true,  false, false, false, false, true,  false, true,  false, false, false, fal
 false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, true,  false, false, true
 );
 
+float hash11(float p)
+{
+    p = fract(p * .1031);
+    p *= p + 33.33;
+    p *= p + p;
+    return fract(p);
+}
+
+float hash12(vec2 p)
+{
+	vec3 p3  = fract(vec3(p.xyx) * .1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+
 float hash13(vec3 p3)
 {
 	p3  = fract(p3 * .1031);
