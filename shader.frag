@@ -405,7 +405,7 @@ void main()
 
   
   
-  for (float numbers = 0.; numbers < t; numbers++)
+  for (float numbers = min(0., t-20.); numbers < t; numbers++)
   {
     color = max(color, lcd(uv,
           hash21(numbers * 345.) * 5.,
