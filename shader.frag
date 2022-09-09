@@ -201,7 +201,7 @@ float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bo
 vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot, float num)
 {
     float sh=.005;
-    uv = scrot(uv, 1./sc, rot) - pos;
+    uv = scrot(uv-pos, 1./sc, rot);
  	vec3 p3 = vec3(uv, t*0.025);
 	
 	float value1, value2;
