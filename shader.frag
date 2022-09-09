@@ -440,7 +440,6 @@ void main()
       col1 = hash31(float(i) * 8989. + 9843.);
       col2 = hash31(float(i) * 2349. + 1239.);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
-      scalefactor = 0.02;
     }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
