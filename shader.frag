@@ -422,18 +422,18 @@ void main()
   dispnum[0] = 0.;
   dispnum[1] = 1.;
   float numbers = 23.4;
-  //col1 = hash31(numbers * 8989. + 9843.);
-  //col2 = hash31(numbers * 2349. + 1239.);
-  //scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
-  //rotation = 0.;
-  //for (int i=0; i<10; i++) dispnum[i]=float(i);
-  ////dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
-  //for (int i = 0; i<numnrs; i++)
-  //{
-  //  color = max(color, lcd(uv,
-  //        //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
-  //        pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
-  //}
+  col1 = hash31(numbers * 8989. + 9843.);
+  col2 = hash31(numbers * 2349. + 1239.);
+  scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
+  rotation = 0.;
+  for (int i=0; i<10; i++) dispnum[i]=float(i);
+  //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
+  for (int i = 0; i<numnrs; i++)
+  {
+    color = max(color, lcd(uv,
+          //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
+          pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
+  }
 
 
   gl_FragColor = vec4(color, 1.);
