@@ -423,8 +423,7 @@ void main()
   dispnum[0] = 0.;
   dispnum[1] = 1.;
   float numbers = 23.4;
-  col1 = hash31(numbers * 8989. + 9843.);
-  col2 = hash31(numbers * 2349. + 1239.);
+
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
 
@@ -437,6 +436,8 @@ void main()
   {
     if (mode == 0)
     {
+      col1 = hash31(float(i) * 8989. + 9843.);
+      col2 = hash31(float(i) * 2349. + 1239.);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
     }
     color = max(color, lcd(uv,
