@@ -426,7 +426,7 @@ void main()
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
   for (int i=0; i<10; i++) dispnum[i]=i;
-  dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
+  //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs, i++)
   {
     color = max(color, lcd(uv,
