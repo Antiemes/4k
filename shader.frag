@@ -481,6 +481,13 @@ void main()
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
       rotation = 0.;
       rndamount = 0.;
+      if (sub > .6)
+      {
+        uv = scrot(uv, .6, -.4);
+        pos = vec2(-.5, -.2);
+        spacing = vec2(.1, .02);
+        rotation = hash11(float(i)*1345.) + .2 + .2*sin(t*(0.4+hash11(float(i)*435.)) + hash11(float(i)*5134. + 934.));
+      }
     }
     else if (mode == 2)
     {
