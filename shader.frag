@@ -224,6 +224,7 @@ vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot
 //    }
 //    
 //    return col*c;
+    return vec3(.0, .0, .0);
 }
 
 
