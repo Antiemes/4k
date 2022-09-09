@@ -409,7 +409,7 @@ void main()
   for (float numbers = max(0., t-20.); numbers < t; numbers++)
   {
     color = max(color, lcd(uv,
-          hash21(numbers * 345.) * 5.,
+          (hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           hash31(numbers * 8989. + 9843.),
           hash31(numbers * 2349. + 1239.),
           .1,
