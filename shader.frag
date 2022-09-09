@@ -22,19 +22,18 @@ float hash11(float p)
     return fract(p);
 }
 
-float hash12(vec2 p)
+vec2 hash21(float p)
 {
-	vec3 p3  = fract(vec3(p.xyx) * .1031);
-    p3 += dot(p3, p3.yzx + 33.33);
-    return fract((p3.x + p3.y) * p3.z);
+	vec3 p3 = fract(vec3(p) * vec3(.1031, .1030, .0973));
+	p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.xx+p3.yz)*p3.zy);
 }
 
-
-float hash13(vec3 p3)
+vec3 hash31(float p)
 {
-	p3  = fract(p3 * .1031);
-    p3 += dot(p3, p3.zyx + 31.32);
-    return fract((p3.x + p3.y) * p3.z);
+   vec3 p3 = fract(vec3(p) * vec3(.1031, .1030, .0973));
+   p3 += dot(p3, p3.yzx+33.33);
+   return fract((p3.xxy+p3.yzz)*p3.zyx); 
 }
 
 vec2 scrot(vec2 uv, float sc, float rot)
@@ -401,7 +400,7 @@ void main()
   
   for (float numbers = 0.; numbers < t; numbers++)
   {
-    color = max(color, lcd(uv, hash12(numbers * 234.34), vec3(.1, .016, .96), vec3(.26, .38, .3), .1,  0.5+0.5*sin(t), sin(t*3.), 0.));
+    color = max(color, lcd(uv, hash21(numbers * 234.34), vec3(.1, .016, .96), vec3(.26, .38, .3), .1,  0.5+0.5*sin(t), sin(t*3.), 0.));
   }
 
 
