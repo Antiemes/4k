@@ -421,11 +421,12 @@ void main()
   spacing = vec2(0.);
   dispnum[0] = 0.;
   dispnum[1] = 1.;
+  float numbers = 23.4;
   col1 = hash31(numbers * 8989. + 9843.);
   col2 = hash31(numbers * 2349. + 1239.);
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
-  for (int i=0; i<10; i++) dispnum[i]=i;
+  for (int i=0; i<10; i++) dispnum[i]=float(i);
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
