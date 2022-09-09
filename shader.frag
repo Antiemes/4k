@@ -537,7 +537,7 @@ void main()
       dispnum[11] = 2.;
 
     }
-    color = max(color, lcd(uv,,
+    color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
   }
