@@ -164,6 +164,7 @@ float simplex3d(vec3 p) {
 float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bool segf, bool segg)
 {
     float d;
+    uv = uv-vec2(.5, .5);
     d =        orsdParallelogram(uv-vec2(.5, .3), .12, .12, .035, .08, .06);
     d = min(d, orsdParallelogram(uv-vec2(.61, .7), .12, .12, .035, .08, .06));
     d = max(d,-sdOrientedBox(uv-vec2(.35, .19), vec2(0., 0.), vec2(-.15, -.2), .02)); //Lower left
@@ -407,7 +408,7 @@ void main()
   
   for (float numbers = max(0., t-20.); numbers < t; numbers++)
   {
-    color = max(color, lcd(uv-vec2(.5, .5),
+    color = max(color, lcd(uv,
           hash21(numbers * 345.) * 5.,
           hash31(numbers * 8989. + 9843.),
           hash31(numbers * 2349. + 1239.),
