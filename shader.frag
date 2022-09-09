@@ -530,10 +530,10 @@ void main()
     else if (mode == 4)
     {
       pos = vec2(-.6, -.3);
-      col1 = hash31(float(i) * 3175. + 2192.);
-      col2 = hash31(float(i) * 12506. + 1099.);
+      col1 = hash31(float(i) * 2192. + 3175.);
+      col2 = hash31(float(i) * 1099. + 12506.);
       spacing = vec2(.12, .05);
-      scalefactor = hash11(float(i)*534.)*.8 + .3 + .15*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
+      scalefactor = hash11(float(i)*982.)*.8 + .3 + .15*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*532. + 445.));
       scalefactor = mix(scalefactor, scalefactor * .15 + .3, sub);
       rotation = .4;
       rndamount = -3.0*bass + 1.5;
@@ -550,6 +550,14 @@ void main()
       dispnum[9] = 0.;
       dispnum[10] = 2.;
       dispnum[11] = 2.;
+      if (sub > .6)
+      {
+        pos = vec2(-.2);
+        uv = scrot(uv, .6, -.4);
+        spacing = vec2(.02, .03);
+        rotation = hash11(float(i)*1345.) + .2 + .2*sin(t*(0.4+hash11(float(i)*435.)) + hash11(float(i)*5134. + 934.));
+        uv=scrot(uv, .4, -1.);
+      }
 
     }
     color = max(color, lcd(uv,
