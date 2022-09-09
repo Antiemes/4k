@@ -508,7 +508,32 @@ void main()
       dispnum[10] = 2.;
       dispnum[11] = 2.;
     }
-    color = max(color, lcd(uv,
+    else if (mode == 4)
+    {
+      pos = vec2(-.6, -.3);
+      col1 = hash31(float(i) * 3175. + 2192.);
+      col2 = hash31(float(i) * 12506. + 1099.);
+      spacing = vec2(.12, .05);
+      scalefactor = hash11(float(i)*534.)*.8 + .3 + .15*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
+      scalefactor = mix(scalefactor, scalefactor * .15 + .3, sub);
+      rotation = .4;
+      rndamount = -3.0*bass + 1.5;
+      dispnum[0] = 10.;
+      dispnum[1] = 11.;
+      dispnum[2] = 12.;
+      dispnum[3] = 13.;
+      dispnum[4] = 14.;
+      dispnum[5] = 15.;
+      dispnum[6] = 16.;
+      dispnum[7] = 17.;
+
+      dispnum[8] = 2.;
+      dispnum[9] = 0.;
+      dispnum[10] = 2.;
+      dispnum[11] = 2.;
+
+    }
+    color = max(color, lcd(scrot(uv, .6, .3),
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
   }
