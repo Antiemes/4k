@@ -139,6 +139,98 @@ float simplex3d(vec3 p) {
 }
 
 
+float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bool segf, bool segg)
+{
+    float d;
+    d =        orsdParallelogram(uv-vec2(.5, .3), .12, .12, .035, .08, .06);
+    d = min(d, orsdParallelogram(uv-vec2(.61, .7), .12, .12, .035, .08, .06));
+    d = max(d,-sdOrientedBox(uv-vec2(.35, .19), vec2(0., 0.), vec2(-.15, -.2), .02)); //Lower left
+    d = max(d,-sdOrientedBox(uv-vec2(.59, .19), vec2(0., 0.), vec2(.025, -.2), .02)); //Lower right
+    d = max(d,-sdOrientedBox(uv-vec2(.77, .8), vec2(0., 0.), vec2(.1, .2), .02)); //Upper right
+    d = max(d,-sdOrientedBox(uv-vec2(.53, .8), vec2(0., 0.), vec2(-.1, .2), .02)); //Upper left
+    
+    d = max(d,-sdOrientedBox(uv-vec2(.45, .57), vec2(0., 0.), vec2(-.14, -.04), .02)); //Mid left 1
+    d = max(d,-sdOrientedBox(uv-vec2(.42, .4), vec2(0., 0.), vec2(-.14, .15), .02)); //Mid left 2
+    d = max(d,-sdOrientedBox(uv-vec2(.83, .43), vec2(0., 0.), vec2(-.14, .15), .02)); //Mid right 1
+    d = max(d,-sdOrientedBox(uv-vec2(.8, .46), vec2(0., 0.), vec2(-.14, -.04), .02)); //Mid right 2
+    
+    
+    if (!sege) d = max(d,-sdTriangle(uv, vec2(.22, .03), vec2(.47, .35), vec2(0., .85))); //lower left
+    if (!segd) d = max(d,-sdTriangle(uv, vec2(.22, .03), vec2(.55, .43), vec2(.61, .03))); //bottom
+    if (!segc) d = max(d,-sdTriangle(uv, vec2(.95, .5), vec2(.57, .39), vec2(.62, -.05))); //lower right
+    if (!segb) d = max(d,-sdTriangle(uv, vec2(.95, .3), vec2(.67, .61), vec2(.93, 1.1))); //upper right
+    if (!sega) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.66, .59), vec2(.93, 1.1))); //top
+    if (!segf) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.62, .62), vec2(.25, .52))); //upper left
+    if (!segg)
+    {
+        d = max(d,-sdTriangle(uv, vec2(.8, .455), vec2(.65, .62), vec2(.3, .525))); //mid
+        d = max(d,-sdTriangle(uv, vec2(.8, .465), vec2(.45, .37), vec2(.3, .535))); //mid
+    }
+    
+    //d = min(d, sdTriangle(uv, vec2(1., 1.), vec2(.5, 1.), vec2(1., .5))); //
+    //d = min(d, sdTriangle(uv, vec2(.0, .0), vec2(.5, 0.), vec2(0., .5))); //
+    
+    
+    return d;
+}
+
+vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot, float num)
+{
+    float sh=.005;
+    uv = scrot(uv, 1./sc, rot) - pos;
+ 	vec3 p3 = vec3(uv, iTime*0.025);
+	
+	float value1, value2;
+
+	value1 = simplex3d(p3*24.0);
+	value2 = simplex3d((p3+vec3(.1456, -.1242, .536345))*24.0);
+	
+	value1 = 0.5 + 0.8*value1;
+	value2 = 0.5 + 0.8*value2;
+    
+    float c, d;
+    
+    bool sega=false, segb=false, segc=false, segd=false, sege=false, segf=false, segg=false;
+    if (num < .5) {sega=segb=segc=segd=sege=segf=true;}
+    else if (num < 1.5) {segb=segc=true;}
+    else if (num < 2.5) {sega=segb=segg=sege=segd=true;}
+    else if (num < 3.5) {sega=segb=segc=segd=segg=true;}
+    else if (num < 4.5) {segf=segg=segb=segc=true;}
+    else if (num < 5.5) {sega=segf=segg=segc=segd=true;}
+    else if (num < 6.5) {sega=sege=segf=segg=segc=segd=true;}
+    else if (num < 7.5) {sega=segb=segc=true;}
+    else if (num < 8.5) {sega=segb=segc=segd=sege=segf=segg=true;}
+    else if (num < 9.5) {sega=segb=segc=segd=segf=segg=true;}
+    else if (num <10.5) {sega=sege=segf=segg=true;} //F
+    else if (num <11.5) {segc=segd=sege=true;} //u
+    else if (num <12.5) {segc=segg=sege=true;} //n
+    else if (num <13.5) {segd=sege=segg=true;} //c
+    else if (num <14.5) {segd=sege=segf=segg=true;} //t
+    else if (num <15.5) {sege=true;} //i
+    else if (num <16.5) {segc=segd=sege=segg=true;} //o
+    else if (num <17.5) {segc=segg=sege=true;} //n
+    
+
+    
+    
+    
+    d = lcdmask(uv, sega, segb, segc, segd, sege, segf, segg);
+    
+    c = 1.-smoothstep(.0-sh, .0+sh, d);
+
+    vec3 r=col1;
+    vec3 b=col2;
+    vec3 col = vec3(hash13(vec3(uv*9873., iTime*99.45)));;
+    if (sin(iTime)*cos(iTime*3.234+.34)+sin(iTime*.235)<rnd)
+    {
+        col = 0.1 * col + r*value1 + b*value2;
+    }
+    
+    return col*c;
+}
+
+
+
 vec3 hsv2rgb(vec3 c)
 {
     vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
