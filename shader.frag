@@ -427,6 +427,8 @@ void main()
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
 
+  float sub = mod(t, 16.) / 16.;
+
   if (t < 15.)
   {
     mode = 0;
@@ -489,7 +491,7 @@ void main()
       col2 = hash31(float(i) * 12506. + 1099.);
       spacing = vec2(.12, .05);
       scalefactor = hash11(float(i)*534.)*.8 + .3 + .15*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
-      scalefactor = scalefactor * .15 + .3;
+      scalefactor = mix(scalefactor, scalefactor * .15 + .3, sub);
       rotation = .4;
       rndamount = -3.0*bass + 1.5;
       dispnum[0] = 10.;
