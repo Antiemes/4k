@@ -419,7 +419,7 @@ void main()
 
   int mode;
 
-  numnrs = 11;
+  numnrs = 12;
   pos = vec2(0., 0.);
   spacing = vec2(0.);
   float numbers = 23.4;
