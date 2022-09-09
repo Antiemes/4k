@@ -427,24 +427,26 @@ void main()
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
 
-  if (t < 16.)
+  if (t < 15.)
   {
     mode = 0;
   }
-  else if (t < 32.)
+  else if (t < 31.)
   {
     mode = 1;
   }
-  else if (t < 48.)
+  else if (t < 47.)
   {
     mode = 2;
   }
-  else if (t < 64.)
+  else if (t < 63.)
   {
     mode = 3;
   }
   else mode = 1;
 
+
+  mode = 3;
 
   for (int i=0; i<10; i++) dispnum[i]=hash11(float(i) * 3256. + mode * 30.) * 10.;
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
