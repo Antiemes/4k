@@ -446,7 +446,7 @@ void main()
   else mode = 1;
 
 
-  for (int i=0; i<10; i++) dispnum[i]=float(i) + mode * 30.;
+  for (int i=0; i<10; i++) dispnum[i]=hash11(float(i) * 3256. + mode * 30.;
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
@@ -487,7 +487,7 @@ void main()
       col2 = hash31(float(i) * 12506. + 1099.);
       spacing = vec2(.5, .0);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
-      rotation = hash11(float(i)*8345. + 654.) - .5;
+      rotation = 0.
       rndamount = -3.0*bass + 1.5;
       dispnum[0] = 10.;
       dispnum[1] = 11.;
