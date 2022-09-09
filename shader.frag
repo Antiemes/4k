@@ -406,8 +406,10 @@ void main()
   vec3 color = vec3(.0);
 
   
-  
-  for (float numbers = floor(t/8.); numbers < floor((t/8. + 10.)); numbers++)
+ 
+  float numnr = mod(t, 16.) + .5;
+
+  for (float numbers = floor(t/8.); numbers < floor((t/8. + numnr)); numbers++)
   {
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
