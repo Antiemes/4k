@@ -446,7 +446,7 @@ void main()
   else mode = 1;
 
 
-  for (int i=0; i<10; i++) dispnum[i]=hash11(float(i) * 3256. + mode * 30.;
+  for (int i=0; i<10; i++) dispnum[i]=hash11(float(i) * 3256. + mode * 30.) * 10.;
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
