@@ -197,34 +197,33 @@ vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot
     else if (num < 2.5) {sega=segb=segg=sege=segd=true;}
     else if (num < 3.5) {sega=segb=segc=segd=segg=true;}
     else if (num < 4.5) {segf=segg=segb=segc=true;}
-//    else if (num < 5.5) {sega=segf=segg=segc=segd=true;}
-//    else if (num < 6.5) {sega=sege=segf=segg=segc=segd=true;}
-//    else if (num < 7.5) {sega=segb=segc=true;}
-//    else if (num < 8.5) {sega=segb=segc=segd=sege=segf=segg=true;}
-//    else if (num < 9.5) {sega=segb=segc=segd=segf=segg=true;}
-//    else if (num <10.5) {sega=sege=segf=segg=true;} //F
-//    else if (num <11.5) {segc=segd=sege=true;} //u
-//    else if (num <12.5) {segc=segg=sege=true;} //n
-//    else if (num <13.5) {segd=sege=segg=true;} //c
-//    else if (num <14.5) {segd=sege=segf=segg=true;} //t
-//    else if (num <15.5) {sege=true;} //i
-//    else if (num <16.5) {segc=segd=sege=segg=true;} //o
-//    else if (num <17.5) {segc=segg=sege=true;} //n
-//    
-//    d = lcdmask(uv, sega, segb, segc, segd, sege, segf, segg);
-//    
-//    c = 1.-smoothstep(.0-sh, .0+sh, d);
-//
-//    vec3 r=col1;
-//    vec3 b=col2;
-//    vec3 col = vec3(hash13(vec3(uv*9873., iTime*99.45)));;
-//    if (sin(iTime)*cos(iTime*3.234+.34)+sin(iTime*.235)<rnd)
-//    {
-//        col = 0.1 * col + r*value1 + b*value2;
-//    }
-//    
-//    return col*c;
-    return vec3(.0, .0, .0);
+    else if (num < 5.5) {sega=segf=segg=segc=segd=true;}
+    else if (num < 6.5) {sega=sege=segf=segg=segc=segd=true;}
+    else if (num < 7.5) {sega=segb=segc=true;}
+    else if (num < 8.5) {sega=segb=segc=segd=sege=segf=segg=true;}
+    else if (num < 9.5) {sega=segb=segc=segd=segf=segg=true;}
+    else if (num <10.5) {sega=sege=segf=segg=true;} //F
+    else if (num <11.5) {segc=segd=sege=true;} //u
+    else if (num <12.5) {segc=segg=sege=true;} //n
+    else if (num <13.5) {segd=sege=segg=true;} //c
+    else if (num <14.5) {segd=sege=segf=segg=true;} //t
+    else if (num <15.5) {sege=true;} //i
+    else if (num <16.5) {segc=segd=sege=segg=true;} //o
+    else if (num <17.5) {segc=segg=sege=true;} //n
+    
+    d = lcdmask(uv, sega, segb, segc, segd, sege, segf, segg);
+    
+    c = 1.-smoothstep(.0-sh, .0+sh, d);
+
+    vec3 r=col1;
+    vec3 b=col2;
+    vec3 col = vec3(hash13(vec3(uv*9873., t*99.45)));;
+    if (sin(t)*cos(t*3.234+.34)+sin(t*.235)<rnd)
+    {
+        col = 0.1 * col + r*value1 + b*value2;
+    }
+    
+    return col*c;
 }
 
 
