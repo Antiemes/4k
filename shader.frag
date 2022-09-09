@@ -454,7 +454,7 @@ void main()
       col2 = hash31(float(i) * 2349. + 1239.);
       spacing = vec2(0.);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
-      rotation = 0.
+      rotation = 0.;
       rndamount = 0.;
     }
     else if (mode == 1)
@@ -464,7 +464,7 @@ void main()
       col2 = hash31(float(i) * 2349. + 1239.);
       spacing = vec2(.5, .0);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
-      rotation = 0.
+      rotation = 0.;
       rndamount = 0.;
     }
     else if (mode == 2)
