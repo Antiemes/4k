@@ -431,7 +431,7 @@ void main()
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
-    if (scale == 0)
+    if (mode == 0)
     {
       scalefactor = hash11(float(i)*534.) + .2;
     }
