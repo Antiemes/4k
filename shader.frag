@@ -401,7 +401,7 @@ void main()
   
   for (float numbers = 0.; numbers < t; numbers++)
   {
-    color = max(color, lcd(uv, vec2(.2, .2) + vec2(numbers), vec3(.1, .016, .96), vec3(.26, .38, .3), .1,  0.5+0.5*sin(t), sin(t*3.), 0.));
+    color = max(color, lcd(uv, hash12(numbers * 234.34), vec3(.1, .016, .96), vec3(.26, .38, .3), .1,  0.5+0.5*sin(t), sin(t*3.), 0.));
   }
 
 
