@@ -182,7 +182,7 @@ float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bo
     if (!segd) d = max(d,-sdTriangle(uv, vec2(.22, .03), vec2(.55, .43), vec2(.61, .03))); //bottom
     if (!segc) d = max(d,-sdTriangle(uv, vec2(.95, .5), vec2(.57, .39), vec2(.62, -.05))); //lower right
     if (!segb) d = max(d,-sdTriangle(uv, vec2(.95, .3), vec2(.67, .61), vec2(.93, 1.1))); //upper right
-    if (!sega) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.66, .59), vec2(.93, 1.1))); //top
+    if (!sega) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.66, .58), vec2(.93, 1.1))); //top
     if (!segf) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.62, .62), vec2(.25, .52))); //upper left
     if (!segg)
     {
