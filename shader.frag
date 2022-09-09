@@ -433,7 +433,7 @@ void main()
   {
     if (mode == 0)
     {
-      scalefactor = hash11(float(i)*534.) + .2;
+      scalefactor = hash11(float(i)*534.) + .2 + .2*sin(hash11(float(i)*345. + 45645.));
     }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
