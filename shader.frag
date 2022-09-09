@@ -419,7 +419,7 @@ void main()
 
   int mode;
 
-  numnrs = 10;
+  numnrs = 11;
   pos = vec2(0., 0.);
   spacing = vec2(0.);
   float numbers = 23.4;
@@ -497,6 +497,11 @@ void main()
       dispnum[5] = 15.;
       dispnum[6] = 16.;
       dispnum[7] = 17.;
+
+      dispnum[8] = 2.;
+      dispnum[9] = 0.;
+      dispnum[10] = 2.;
+      dispnum[1] = 2.;
     }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
