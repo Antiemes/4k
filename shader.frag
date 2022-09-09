@@ -382,6 +382,7 @@ void main()
 	//vec2 uv = (gl_FragCoord.xy - vec2(960., 540.)) / 540.;
 	//uv.x *= iResolution.x/iResolution.y;
 
+  float bass = clamp(pow(sin((t+0.625)*PI), 30.)*5., 0., 1.);
 
 /*
 
@@ -442,6 +443,7 @@ void main()
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
       rotation = hash11(float(i)*8345. + 654.) - .5;
     }
+    rndamount = bass;
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
