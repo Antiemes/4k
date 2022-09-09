@@ -556,7 +556,6 @@ void main()
         uv = scrot(uv, .6, -.4);
         spacing = vec2(.02, .03);
         rotation = hash11(float(i)*1345.) + .2 + .2*sin(t*(0.4+hash11(float(i)*435.)) + hash11(float(i)*5134. + 934.));
-        uv=scrot(uv, .4, -1.);
       }
 
     }
