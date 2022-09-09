@@ -179,7 +179,7 @@ vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot
 {
     float sh=.005;
     uv = scrot(uv, 1./sc, rot) - pos;
- 	vec3 p3 = vec3(uv, iTime*0.025);
+ 	vec3 p3 = vec3(uv, t*0.025);
 	
 	float value1, value2;
 
