@@ -47,7 +47,7 @@ vec2 scrot(vec2 uv, float sc, float rot)
 {
     float s = sin(rot);
     float c = cos(rot);
-    return uv*mat2(c,s,-s,c)*sc;
+    return sc*uv*mat2(c,s,-s,c);
 }
 
 float sdParallelogram(in vec2 p, float wi, float he, float sk)
