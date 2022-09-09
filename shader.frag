@@ -180,14 +180,14 @@ float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bo
     
     if (!sege) d = max(d,-sdTriangle(uv, vec2(.22, .03), vec2(.47, .35), vec2(0., .85))); //lower left
     if (!segd) d = max(d,-sdTriangle(uv, vec2(.22, .03), vec2(.55, .43), vec2(.61, .03))); //bottom
-    if (!segc) d = max(d,-sdTriangle(uv, vec2(.95, .5), vec2(.57, .39), vec2(.62, -.05))); //lower right
-    if (!segb) d = max(d,-sdTriangle(uv, vec2(.95, .3), vec2(.67, .61), vec2(.93, 1.1))); //upper right
-    if (!sega) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.66, .58), vec2(.93, 1.1))); //top
-    if (!segf) d = max(d,-sdTriangle(uv, vec2(.37, 1.1), vec2(.62, .62), vec2(.25, .52))); //upper left
+    if (!segc) d = max(d,-sdTriangle(uv, vec2(.95, .51), vec2(.57, .40), vec2(.62, -.05))); //lower right
+    if (!segb) d = max(d,-sdTriangle(uv, vec2(.95, .3), vec2(.66, .60), vec2(.93, 1.1))); //upper right
+    if (!sega) d = max(d,-sdTriangle(uv, vec2(.35, 1.1), vec2(.66, .59), vec2(.92, 1.04))); //top
+    if (!segf) d = max(d,-sdTriangle(uv, vec2(.38, 1.09), vec2(.63, .62), vec2(.25, .51))); //upper left
     if (!segg)
     {
-        d = max(d,-sdTriangle(uv, vec2(.8, .455), vec2(.65, .62), vec2(.3, .525))); //mid
-        d = max(d,-sdTriangle(uv, vec2(.8, .465), vec2(.45, .37), vec2(.3, .535))); //mid
+        d = max(d,-sdTriangle(uv, vec2(.82, .455), vec2(.65, .63), vec2(.28, .525))); //mid
+        d = max(d,-sdTriangle(uv, vec2(.82, .465), vec2(.45, .36), vec2(.28, .535))); //mid
     }
     
     //d = min(d, sdTriangle(uv, vec2(1., 1.), vec2(.5, 1.), vec2(1., .5))); //
