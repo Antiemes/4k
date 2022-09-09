@@ -427,7 +427,7 @@ void main()
   rotation = 0.;
   for (int i=0; i<10; i++) dispnum[i]=i;
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
-  for (int i = 0; i<numnrs, i++)
+  for (int i = 0; i<numnrs; i++)
   {
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
