@@ -449,6 +449,10 @@ void main()
   {
     mode = 3;
   }
+  else if (t < 79.)
+  {
+    mode = 4;
+  }
   else mode = 3;
 
 
