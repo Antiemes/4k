@@ -484,10 +484,10 @@ void main()
     }
     else if (mode == 3)
     {
-      pos = vec2(-1., -.5);
+      pos = vec2(-.8, -.4);
       col1 = hash31(float(i) * 3175. + 2192.);
       col2 = hash31(float(i) * 12506. + 1099.);
-      spacing = vec2(.2, .08);
+      spacing = vec2(.15, .06);
       scalefactor = hash11(float(i)*534.)*.8 + .3 + .15*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
       scalefactor = scalefactor * .1 + .4;
       rotation = .4;
