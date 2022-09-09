@@ -439,6 +439,11 @@ void main()
   {
     mode = 2;
   }
+  else if (t < 64.)
+  {
+    mode = 3;
+  }
+  else mode = 1;
 
 
   for (int i=0; i<10; i++) dispnum[i]=float(i) + mode * 30.;
