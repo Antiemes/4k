@@ -432,7 +432,10 @@ void main()
   if (t < 15.)
   {
     mode = 0;
-    numnrs = max(int(t), 12);
+    if (t < 12)
+    {
+      numnrs = int(t);
+    }
   }
   else if (t < 31.)
   {
