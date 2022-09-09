@@ -447,7 +447,7 @@ void main()
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
   }
 
-  if (gl_FragCoord.x > 10.)
+  if (gl_FragCoord.x > 1000.)
   //if (uv.x > 0.)
   {
     color.x = 1.;
