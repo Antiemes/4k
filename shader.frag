@@ -418,7 +418,7 @@ void main()
   int mode;
 
   numnrs = 10;
-  pos = vec2(-1., -.3);
+  pos = vec2(0., 0.);
   spacing = vec2(0.);
   dispnum[0] = 0.;
   dispnum[1] = 1.;
