@@ -484,7 +484,7 @@ void main()
     }
     else if (mode == 3)
     {
-      pos = vec2(-1., -.5.);
+      pos = vec2(-1., -.5);
       col1 = hash31(float(i) * 3175. + 2192.);
       col2 = hash31(float(i) * 12506. + 1099.);
       spacing = vec2(.2, .08);
