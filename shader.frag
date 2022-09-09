@@ -415,6 +415,7 @@ void main()
   float dispnum[20];
   vec2 spacing;
 
+  int mode;
 
   numnrs = 10;
   pos = vec2(-1., -.3);
@@ -430,6 +431,10 @@ void main()
   //dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
   for (int i = 0; i<numnrs; i++)
   {
+    if (scale == 0)
+    {
+      scalefactor = hash11(float(i)*534.) + .2;
+    }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
