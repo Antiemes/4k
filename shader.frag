@@ -429,7 +429,18 @@ void main()
   scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
   rotation = 0.;
 
-  mode = 0;
+  if (t < 16.)
+  {
+    mode = 0;
+  }
+  else if (t < 32.)
+  {
+    mode = 1;
+  }
+  else if (t < 48.)
+  {
+    mode = 2;
+  }
 
 
   for (int i=0; i<10; i++) dispnum[i]=float(i);
@@ -438,12 +449,34 @@ void main()
   {
     if (mode == 0)
     {
+      pos = vec2(0., 0.);
       col1 = hash31(float(i) * 8989. + 9843.);
       col2 = hash31(float(i) * 2349. + 1239.);
+      spacing = vec2(0.);
+      scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
+      rotation = 0.
+      rndamount = 0.;
+    }
+    else if (mode == 1)
+    {
+      pos = vec2(-1., 0.);
+      col1 = hash31(float(i) * 8989. + 9843.);
+      col2 = hash31(float(i) * 2349. + 1239.);
+      spacing = vec2(.5, .0);
+      scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
+      rotation = 0.
+      rndamount = 0.;
+    }
+    else if (mode == 2)
+    {
+      pos = vec2(-1., 0.);
+      col1 = hash31(float(i) * 8989. + 9843.);
+      col2 = hash31(float(i) * 2349. + 1239.);
+      spacing = vec2(.5, .0);
       scalefactor = hash11(float(i)*534.) + .2 + .2*sin(t*(0.4+hash11(float(i)*275.)) + hash11(float(i)*345. + 445.));
       rotation = hash11(float(i)*8345. + 654.) - .5;
+      rndamount = -3.0*bass + 1.5;
     }
-    rndamount = -3.0*bass + 1.5;
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
           pos + spacing * float(i), col1, col2, rndamount, scalefactor, rotation, float(dispnum[i])));
