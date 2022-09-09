@@ -378,8 +378,8 @@ vec3 hsv2rgb(vec3 c)
 void main()
 {
   vec2 iResolution = vec2(1920., 1080.);
-	vec2 uv = -1.0 + 2.0 * gl_FragCoord.xy / iResolution.xy;
-	uv.x *= iResolution.x/iResolution.y;
+	vec2 uv = (gl_FragCoord.xy - iResolution.xy / 2.) / iResolution.y;
+	//uv.x *= iResolution.x/iResolution.y;
 
 
 /*
