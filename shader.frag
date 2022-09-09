@@ -405,23 +405,33 @@ void main()
 	gl_FragColor = vec4(col*min(t*.25,1.), 1.);*/
 
   vec3 color = vec3(.0);
+  vec2 pos;
+  vec3 col1;
+  vec3 col2;
+  float rndamount;
+  float scalefactor;
+  float rotation;
+  int numnrs;
+  float dispnum[20];
+  vec2 spacing;
 
-  
- 
-  float numnr = mod(t, 16.) + .5;
 
-  for (float numbers = floor(t/8.); numbers < floor((t/8. + numnr)); numbers++)
+  numnrs = 10.;
+  pos = vec2(-1., -.3);
+  spacing = vec2(0.);
+  dispnum[0] = 0.;
+  dispnum[1] = 1.;
+  col1 = hash31(numbers * 8989. + 9843.);
+  col2 = hash31(numbers * 2349. + 1239.);
+  scalefactor = 0.5+0.5*sin(t*hash11(numbers * 6457. + 545));
+  rotation = 0.;
+  for (int i=0; i<10; i++) dispnum[i]=i;
+  dispnum mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
+  for (int i = 0; i<numnrs, i++)
   {
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
-          vec2(0.),
-          hash31(numbers * 8989. + 9843.),
-          hash31(numbers * 2349. + 1239.),
-          .1,
-          0.5+0.5*sin(t*hash11(numbers * 6457. + 545)),
-          //hash11(t*2349.+982.)+t*.1*hash11(t*7348+3945.),
-          0.,
-          mod(hash11(numbers * 7634. + 2983.)*40., 10.)  ));
+          pos + spacing * i, col1, col2, rndamount, scalefactor, rotation, float(dispnum[i]));
   }
 
 
