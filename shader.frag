@@ -416,7 +416,7 @@ void main()
   vec2 spacing;
 
 
-  numnrs = 10.;
+  numnrs = 10;
   pos = vec2(-1., -.3);
   spacing = vec2(0.);
   dispnum[0] = 0.;
