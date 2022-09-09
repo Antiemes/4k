@@ -447,5 +447,10 @@ void main()
   }
 
 
+  if (uv.x > 0.)
+  {
+    color.x = 1.;
+  }
+
   gl_FragColor = vec4(color, 1.);
 }
