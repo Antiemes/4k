@@ -406,7 +406,7 @@ void main()
 
   
   
-  for (float numbers = max(0., t/8.-4.); numbers < t/8.; numbers++)
+  for (float numbers = t/8.; numbers < (t/8. + 10.); numbers++)
   {
     color = max(color, lcd(uv,
           (hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
