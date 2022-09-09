@@ -177,26 +177,26 @@ float lcdmask(vec2 uv, bool sega, bool segb, bool segc, bool segd, bool sege, bo
 
 vec3 lcd(vec2 uv, vec2 pos, vec3 col1, vec3 col2, float rnd, float sc, float rot, float num)
 {
-//    float sh=.005;
-//    uv = scrot(uv, 1./sc, rot) - pos;
-// 	vec3 p3 = vec3(uv, iTime*0.025);
-//	
-//	float value1, value2;
-//
-//	value1 = simplex3d(p3*24.0);
-//	value2 = simplex3d((p3+vec3(.1456, -.1242, .536345))*24.0);
-//	
-//	value1 = 0.5 + 0.8*value1;
-//	value2 = 0.5 + 0.8*value2;
-//    
-//    float c, d;
-//    
-//    bool sega=false, segb=false, segc=false, segd=false, sege=false, segf=false, segg=false;
-//    if (num < .5) {sega=segb=segc=segd=sege=segf=true;}
-//    else if (num < 1.5) {segb=segc=true;}
-//    else if (num < 2.5) {sega=segb=segg=sege=segd=true;}
-//    else if (num < 3.5) {sega=segb=segc=segd=segg=true;}
-//    else if (num < 4.5) {segf=segg=segb=segc=true;}
+    float sh=.005;
+    uv = scrot(uv, 1./sc, rot) - pos;
+ 	vec3 p3 = vec3(uv, iTime*0.025);
+	
+	float value1, value2;
+
+	value1 = simplex3d(p3*24.0);
+	value2 = simplex3d((p3+vec3(.1456, -.1242, .536345))*24.0);
+	
+	value1 = 0.5 + 0.8*value1;
+	value2 = 0.5 + 0.8*value2;
+    
+    float c, d;
+    
+    bool sega=false, segb=false, segc=false, segd=false, sege=false, segf=false, segg=false;
+    if (num < .5) {sega=segb=segc=segd=sege=segf=true;}
+    else if (num < 1.5) {segb=segc=true;}
+    else if (num < 2.5) {sega=segb=segg=sege=segd=true;}
+    else if (num < 3.5) {sega=segb=segc=segd=segg=true;}
+    else if (num < 4.5) {segf=segg=segb=segc=true;}
 //    else if (num < 5.5) {sega=segf=segg=segc=segd=true;}
 //    else if (num < 6.5) {sega=sege=segf=segg=segc=segd=true;}
 //    else if (num < 7.5) {sega=segb=segc=true;}
