@@ -445,7 +445,7 @@ void main()
   {
     mode = 3;
   }
-  else mode = 1;
+  else mode = 3;
 
 
   //mode = 3;
