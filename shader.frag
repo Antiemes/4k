@@ -14,6 +14,131 @@ true,  false, false, false, false, true,  false, true,  false, false, false, fal
 false, true,  true,  true,  false, true,  false, false, true,  true,  true,  false, true,  false, false, true
 );
 
+float hash13(vec3 p3)
+{
+	p3  = fract(p3 * .1031);
+    p3 += dot(p3, p3.zyx + 31.32);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+vec2 scrot(vec2 uv, float sc, float rot)
+{
+    float s = sin(rot);
+    float c = cos(rot);
+    return uv*mat2(c,s,-s,c)*sc;
+}
+
+float sdParallelogram(in vec2 p, float wi, float he, float sk)
+{
+    vec2 e = vec2(sk,he);
+    p = (p.y<0.0)?-p:p;
+    vec2  w = p - e; w.x -= clamp(w.x,-wi,wi);
+    vec2  d = vec2(dot(w,w), -w.y);
+    float s = p.x*e.y - p.y*e.x;
+    p = (s<0.0)?-p:p;
+    vec2  v = p - vec2(wi,0); v -= e*clamp(dot(v,e)/dot(e,e),-1.0,1.0);
+    d = min( d, vec2(dot(v,v), wi*he-abs(s)));
+    return sqrt(d.x)*sign(-d.y);
+}
+
+float rsdParallelogram(in vec2 p, float wi, float he, float sk, in float r)
+{
+  return sdParallelogram(p, wi, he, sk) - r;
+}
+
+float orsdParallelogram(in vec2 p, float wi, float he, float sk, in float r, float r2)
+{
+  return abs(rsdParallelogram(p, wi, he, sk, r)) - r2;
+}
+
+float sdOrientedBox(in vec2 p, in vec2 a, in vec2 b, float th)
+{
+    float l = length(b-a);
+    vec2  d = (b-a)/l;
+    vec2  q = (p-(a+b)*0.5);
+          q = mat2(d.x,-d.y,d.y,d.x)*q;
+          q = abs(q)-vec2(l,th)*0.5;
+    return length(max(q,0.0)) + min(max(q.x,q.y),0.0);    
+}
+
+float sdTriangle(in vec2 p, in vec2 p0, in vec2 p1, in vec2 p2)
+{
+    vec2 e0 = p1-p0, e1 = p2-p1, e2 = p0-p2;
+    vec2 v0 = p -p0, v1 = p -p1, v2 = p -p2;
+    vec2 pq0 = v0 - e0*clamp( dot(v0,e0)/dot(e0,e0), 0.0, 1.0 );
+    vec2 pq1 = v1 - e1*clamp( dot(v1,e1)/dot(e1,e1), 0.0, 1.0 );
+    vec2 pq2 = v2 - e2*clamp( dot(v2,e2)/dot(e2,e2), 0.0, 1.0 );
+    float s = sign( e0.x*e2.y - e0.y*e2.x );
+    vec2 d = min(min(vec2(dot(pq0,pq0), s*(v0.x*e0.y-v0.y*e0.x)),
+                     vec2(dot(pq1,pq1), s*(v1.x*e1.y-v1.y*e1.x))),
+                     vec2(dot(pq2,pq2), s*(v2.x*e2.y-v2.y*e2.x)));
+    return -sqrt(d.x)*sign(d.y);
+}
+
+/* discontinuous pseudorandom uniformly distributed in [-0.5, +0.5]^3 */
+vec3 random3(vec3 c) {
+	float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+	vec3 r;
+	r.z = fract(512.0*j);
+	j *= .125;
+	r.x = fract(512.0*j);
+	j *= .125;
+	r.y = fract(512.0*j);
+	return r-0.5;
+}
+
+/* skew constants for 3d simplex functions */
+const float F3 =  0.3333333;
+const float G3 =  0.1666667;
+
+/* 3d simplex noise */
+float simplex3d(vec3 p) {
+	 /* 1. find current tetrahedron T and it's four vertices */
+	 /* s, s+i1, s+i2, s+1.0 - absolute skewed (integer) coordinates of T vertices */
+	 /* x, x1, x2, x3 - unskewed coordinates of p relative to each of T vertices*/
+	 
+	 /* calculate s and x */
+	 vec3 s = floor(p + dot(p, vec3(F3)));
+	 vec3 x = p - s + dot(s, vec3(G3));
+	 
+	 /* calculate i1 and i2 */
+	 vec3 e = step(vec3(0.0), x - x.yzx);
+	 vec3 i1 = e*(1.0 - e.zxy);
+	 vec3 i2 = 1.0 - e.zxy*(1.0 - e);
+	 	
+	 /* x1, x2, x3 */
+	 vec3 x1 = x - i1 + G3;
+	 vec3 x2 = x - i2 + 2.0*G3;
+	 vec3 x3 = x - 1.0 + 3.0*G3;
+	 
+	 /* 2. find four surflets and store them in d */
+	 vec4 w, d;
+	 
+	 /* calculate surflet weights */
+	 w.x = dot(x, x);
+	 w.y = dot(x1, x1);
+	 w.z = dot(x2, x2);
+	 w.w = dot(x3, x3);
+	 
+	 /* w fades from 0.6 at the center of the surflet to 0.0 at the margin */
+	 w = max(0.6 - w, 0.0);
+	 
+	 /* calculate surflet components */
+	 d.x = dot(random3(s), x);
+	 d.y = dot(random3(s + i1), x1);
+	 d.z = dot(random3(s + i2), x2);
+	 d.w = dot(random3(s + 1.0), x3);
+	 
+	 /* multiply d by w^4 */
+	 w *= w;
+	 w *= w;
+	 d *= w;
+	 
+	 /* 3. return the sum of the four surflets */
+	 return dot(d, vec4(52.0));
+}
+
+
 vec3 hsv2rgb(vec3 c)
 {
     vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
