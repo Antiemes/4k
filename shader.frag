@@ -504,7 +504,7 @@ void main()
       dispnum[8] = 2.;
       dispnum[9] = 0.;
       dispnum[10] = 2.;
-      dispnum[1] = 2.;
+      dispnum[11] = 2.;
     }
     color = max(color, lcd(uv,
           //(hash21(numbers * 345.) - vec2(.5, .5)) * 5.,
